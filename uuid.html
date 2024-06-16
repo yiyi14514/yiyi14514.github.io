@@ -27,6 +27,8 @@
       #shuchu {
         border: 1px solid black; /* 设置边框样式和颜色 */ 
         border-radius: 5px; /* 设置边框角的半径 */
+        white-space: pre-wrap;
+        font-size: 10px;
       }
       #qingchu {
         width: 100%; /* 设置按钮的宽度 */ 
@@ -42,8 +44,15 @@
         border: 2px solid black; /* 设置边框样式和颜色 */ 
         border-radius: 15px; /* 设置边框角的半径 */
       }
+      #copy-btn {
+        width: 100%; /* 设置按钮的宽度 */
+        height: 30px; /* 设置按钮的高度 */
+        font-size: 16px; /* 设置文字大小 */
+        border: 2px solid black; /* 设置边框样式和颜色 */
+        border-radius: 15px; /* 设置边框角的半径 */
+        margin-top: 10px; /* 添加按钮上边距 */
+      }
       #by {
-        font-size: 20px;
         text-align: center;
       }
     </style>
@@ -77,11 +86,26 @@
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'uuids.txt'; // 设置下载的文件名
+        a.download = 'uuid.txt'; // 设置下载的文件名
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url); // 释放URL对象
+      }
+      function copyToClipboard() {
+        // 获取生成的UUID文本
+        var uuidText = document.getElementById('shuchu').textContent;
+        // 创建一个临时的textarea元素用于复制
+        var tempTextarea = document.createElement('textarea');
+        tempTextarea.value = uuidText;
+        document.body.appendChild(tempTextarea);
+        // 选择文本
+        tempTextarea.select();
+        // 复制到剪贴板
+        document.execCommand('copy');
+        // 移除临时的textarea元素
+        document.body.removeChild(tempTextarea);
+        alert('UUID已复制到剪贴板');
       }
     </script>
   </head>
@@ -90,6 +114,8 @@
 	<textarea id="shuliang" placeholder="写出需要生成UUID的数量"></textarea>
     </br></br>
     <button type="button" id="shengcheng" onclick="makeUUIDS()">点击生成</button>
+    </br></br>
+    <button type="button" id="copy-btn" onclick="copyToClipboard()">复制全部</button>
     </br></br>
     <button type="button" id="qingchu" onclick="clearInput()">清除内容</button>
     </br></br>
