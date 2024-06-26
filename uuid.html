@@ -25,11 +25,19 @@
         border-radius: 15px; /* 设置边框角的半径 */
       }
       #shuchu {
-        border: 1px solid black; /* 设置边框样式和颜色 */ 
+        border: 1px solid #ccc; /* 设置边框样式和颜色 */
         border-radius: 5px; /* 设置边框角的半径 */
         white-space: pre-wrap;
-        font-size: 10px;
-      }
+        font-size: 12px; /* 增大字体大小以提高可读性 */
+        height: 150px; /* 设置固定高度 */
+        overflow-y: auto; /* 当内容溢出时显示滚动条 */
+        padding: 10px; /* 增加内边距 */
+        background-color: #f9f9f9; /* 添加背景色 */
+        color: #333; /* 设置字体颜色 */
+        resize: none; /* 禁止用户调整大小 */
+        word-wrap: break-word; /* 确保长单词或URL正确换行 */
+}
+
       #qingchu {
         width: 100%; /* 设置按钮的宽度 */ 
         height: 30px; /* 设置按钮的高度 */ 
@@ -75,6 +83,7 @@
           uuids += generateUUID() + '\n';
         }
         shuchu.innerHTML = uuids;
+        shuchu.scrollTop = 0; // 将滚动条定位到最顶端
         }
       function clearInput() {
         document.getElementById('shuliang').value = ''; // 清空输入框内容
